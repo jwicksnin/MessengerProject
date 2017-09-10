@@ -73,30 +73,26 @@ app.post('/webhook', function (req, res) {
 function receivedMessage(event) {
   const senderID = event.sender.id;
   const recipientID = event.recipient.id;
-  const timeOfMessage = event.timestamp;
-  const message = event.message;
+  const { message, timestamp } = event;
 
   console.log("Received message for user %d and page %d at %d with message:", 
-    senderID, recipientID, timeOfMessage);
+    senderID, recipientID, timestamp);
   console.log(JSON.stringify(message));
 
-  const messageId = message.mid;
+  const { mid, text, attachments } = message;
 
-  const messageText = message.text;
-  const messageAttachments = message.attachments;
-
-  if (messageText) {
+  if (text) {
     // If we receive a text message, check to see if it matches a keyword
     // and send back the template example. Otherwise, just echo the text we received.
-    switch (messageText) {
+    switch (text) {
       case 'generic':
         sendGenericMessage(senderID);
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+        sendTextMessage(senderID, text);
     }
-  } else if (messageAttachments) {
+  } else if (attachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
 }
