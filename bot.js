@@ -89,6 +89,9 @@ function receivedMessage(event) {
         sendGenericMessage(senderID);
         break;
 
+      case 'annie':
+        sendPictureCarousel(senderID);
+
       default:
         sendTextMessage(senderID, text);
     }
@@ -176,6 +179,34 @@ function sendGenericMessage(recipientId) {
 
   callSendAPI(messageData);
 }
+function sendPictureCarousel(recipientID) {
+  const messageData = {
+    recipient: {
+      id: recipientID
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: "Annie At A Computer",
+            // subtitle: "Next-generation virtual reality",
+            // item_url: "https://www.oculus.com/en-us/rift/",               
+            image_url: "https://scontent-sea1-1.xx.fbcdn.net/v/l/t31.0-8/175798_10100760615801828_1915446979_o.jpg?oh=1efa61f440173ae587fddc58c774548a&oe=5A128C5B",
+            buttons: [{
+              type: "postback",
+              title: "I Like This One",
+              payload: "annie-computer",
+            }],
+          }]
+        }
+      }
+    }
+  };  
+
+  callSendAPI(messageData);
+}
 
 function callSendAPI(messageData) {
   return new Promise((resolve, reject) => {
@@ -190,7 +221,7 @@ function callSendAPI(messageData) {
         const recipientId = body.recipient_id;
         const messageId = body.message_id;
 
-        console.log("Successfully sent generic message with id %s to recipient %s",
+        console.log("Sufccessfully sent generic message with id %s to recipient %s",
           messageId, recipientId);
         resolve(body);
       } else {
