@@ -115,8 +115,16 @@ function receivedPostback(event) {
   // When a postback is called, we'll send a message back to the sender to 
   // let them know it was successful
   switch (payload) {
-    case 'annie-computer':
-      sendTextMessage(senderID, "I'm computer saavy!");
+    case 'annie-pumpkin':
+      sendTextMessage(senderID, "I also like to eat pumpkin!");
+      break;
+
+    case 'annie-view':
+      sendTextMessage(senderID, "I love the rain!");
+      break;
+
+    case 'annie-sleeping':
+      sendTextMessage(senderID, "I wore myself out opening my own presents!");
       break;
 
     default:
@@ -197,14 +205,30 @@ function sendPictureCarousel(recipientID) {
         payload: {
           template_type: "generic",
           elements: [{
-            title: "Annie At A Computer",
-            // subtitle: "Next-generation virtual reality",
-            // item_url: "https://www.oculus.com/en-us/rift/",               
-            image_url: "https://scontent-sea1-1.xx.fbcdn.net/v/l/t31.0-8/175798_10100760615801828_1915446979_o.jpg?oh=1efa61f440173ae587fddc58c774548a&oe=5A128C5B",
+            title: "Annie Is a Pumpkin",
+            image_url: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/11220467_10101832167398838_8915419354638245338_n.jpg?oh=ac9cf18e0cf3ac0c62ac64083ad73127&oe=5A193345",
             buttons: [{
               type: "postback",
               title: "I Like This One",
-              payload: "annie-computer",
+              payload: "annie-pumpkin",
+            }],
+          },
+          {
+            title: "Annie With a View",
+            image_url: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-0/p206x206/988373_10100901073393688_1882962262_n.jpg?oh=661bd765d29eee70715b84d650d2a688&oe=5A547C1D",
+            buttons: [{
+              type: "postback",
+              title: "I Like This One",
+              payload: "annie-view",
+            }],
+          },
+          {
+            title: "Annie Is Exhausted",
+            image_url: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-0/q81/p206x206/1798247_10101420839872498_7841486312264934356_n.jpg?oh=f6975db096b6dc4b378783152a139449&oe=5A1375C2",
+            buttons: [{
+              type: "postback",
+              title: "I Like This One",
+              payload: "annie-sleeping",
             }],
           }]
         }
